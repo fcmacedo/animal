@@ -1,6 +1,5 @@
 package br.fmacedo;
 
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -11,23 +10,45 @@ public class App {
 
 		System.out.println("Pense em um animal:");
 		
-		ArrayList  <Animal> listWater= new ArrayList<Animal>();
-		ArrayList  <Animal> listTerrain= new ArrayList<Animal>();
+		AnimalsTree tree = new AnimalsTree();
 		
-		listWater.add(new AnimalWater("Tubarao",null,true));
-		listTerrain.add(new AnimalTerrain("Macaco",null,false));
+				
+
+		Animal animal;
 		
-		if(JOptionPane.showConfirmDialog(null, "O animal que você pensou vive na água?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
-			//agua
-			Evaluation.eval(listWater);
+		if(JOptionPane.showConfirmDialog(null, "O animal que você pensou vive na água?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
 			
+			if(tree.isEmpty())
+			    tree.insert("Tubarao",null);
 			
+			//percorrer a árvore
+			while((animal = tree.getAnimal().getAnimalLeft()) == null){
+				
+				System.out.println("É o " + animal.getName() + "?");
+				
+				
+				
+			}
 			
 		}else{
-			//terra
-			Evaluation.eval(listTerrain);
+			
+			if(tree.isEmpty())
+			    tree.insert("Macaco",null);
 			
 		}
+		
+		
+		
+		//percorrer a árvore
+		while(tree.getAnimal().getAnimalLeft() == null){
+			
+			
+			
+			
+			
+		}
+		
+		
 		
 	}
 	

@@ -5,8 +5,8 @@ public class AnimalWater extends Animal{
 	AnimalWater(){
 		
 	}
-	AnimalWater(String name, String action, boolean isLiveWater){
-		super(name, action, true);
+	AnimalWater(String name, String action){
+		super(name, action);
 	}
 	
 	@Override

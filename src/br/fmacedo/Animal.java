@@ -1,33 +1,52 @@
 package br.fmacedo;
 
-public abstract class Animal {
+public class Animal {
 
 	
 	protected String name;
-	protected boolean isLiveWater;
-	protected Action action;
+	protected String action;
+	protected Animal animalLeft;
+	protected Animal animalRight;
 	
-	
+		
 	Animal(){
 	}
 	
-	Animal(String name, String action, boolean isLiveWater){
+	Animal(String name, String action){
 		this.name = name;
-		this.action = new Action(action,this);
-		this.isLiveWater = isLiveWater;
+		this.action = action;
 	}
-	
-	
-	public boolean isLiveWater() {
-		return isLiveWater;
-	}
-
-	public void setLiveWater(boolean isLiveWater) {
-		this.isLiveWater = isLiveWater;
-	}
-
-	public abstract void _action();
 		
+
+	public void _action(){
+		
+	}
+	
+	
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public Animal getAnimalLeft() {
+		return animalLeft;
+	}
+
+	public void setAnimalLeft(Animal animalWater) {
+		this.animalLeft = animalWater;
+	}
+
+	public Animal getAnimalRight() {
+		return animalRight;
+	}
+
+	public void setAnimalRight(Animal animalTerrain) {
+		this.animalRight = animalTerrain;
+	}
 
 	public String getName() {
 		return name;
@@ -37,6 +56,8 @@ public abstract class Animal {
 		this.name = name;
 	}
 
+	
+	
 	
 	
 }

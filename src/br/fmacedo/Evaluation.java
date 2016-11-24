@@ -11,7 +11,8 @@ public class Evaluation {
 		
 		int i=0;
 		
-		boolean isWater = list.get(i).isLiveWater;
+		boolean isWater = false;
+				//list.get(i).isLiveWater;
 		
 		while(i < list.size()){
 		

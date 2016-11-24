@@ -3,6 +3,7 @@ package br.fmacedo;
 public class Animal {
 
 	
+	
 	protected String name;
 	protected String action;
 	protected Animal animalLeft;
@@ -17,12 +18,6 @@ public class Animal {
 		this.action = action;
 	}
 		
-
-	public void _action(){
-		
-	}
-	
-	
 
 	public String getAction() {
 		return action;

@@ -64,28 +64,17 @@ public class AnimalsTree {
 	        }
 	    }
 	    
-	    
-	    public Animal getAnimal(){
-	    	return getAnimal(this.root);
+	    public void prefixado() {
+	    	prefixado(this.root);
 	    }
 	    
-	    
-
-
-		public Animal getAnimal(Animal root){
-		    if(root == null){
-		        return null;
-		    }
-		    getAnimal(root.getAnimalLeft());
-		   
-		    
-		    return getAnimal(root.getAnimalRight());
-		    
-		    
-		    
-		}
-	  
-	    
+	    public void prefixado(Animal no) {
+	        if(no != null){
+	            System.out.print(no.getName() + " ");
+	            prefixado(no.getAnimalLeft());
+	            prefixado(no.getAnimalRight());
+	        }
+	    }
 	    
 	  
 

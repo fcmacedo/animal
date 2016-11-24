@@ -11,10 +11,6 @@ public class AnimalTerrain extends Animal {
 		super(name, action);
 	}
 	
-	@Override
-	public void _action() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 }

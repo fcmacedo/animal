@@ -12,33 +12,26 @@ public class App {
 		
 		AnimalsTree tree = new AnimalsTree();
 		
-				
-
 		Animal animal;
 		
 		if(JOptionPane.showConfirmDialog(null, "O animal que você pensou vive na água?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
 			
 			if(tree.isEmpty())
-			    tree.insert("Tubarao",null);
+			    tree.insert("Tubarao","vive na agua");
+				
+			    tree.prefixado();
 			
-			//percorrer a árvore
-			while((animal = tree.getAnimal().getAnimalLeft()) == null){
-				
-				System.out.println("É o " + animal.getName() + "?");
-				
-				
-				
-			}
 			
 		}else{
 			
 			if(tree.isEmpty())
-			    tree.insert("Macaco",null);
+			    tree.insert("Macaco","vive na terra");
+		    	tree.prefixado();
 			
 		}
 		
 		
-		
+		/*
 		//percorrer a árvore
 		while(tree.getAnimal().getAnimalLeft() == null){
 			
@@ -48,7 +41,7 @@ public class App {
 			
 		}
 		
-		
+		*/
 		
 	}
 	

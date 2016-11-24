@@ -4,17 +4,16 @@ public abstract class Animal {
 
 	
 	protected String name;
-	protected String action;
 	protected boolean isLiveWater;
+	protected Action action;
 	
 	
 	Animal(){
-		
 	}
 	
 	Animal(String name, String action, boolean isLiveWater){
 		this.name = name;
-		this.action = action;
+		this.action = new Action(action,this);
 		this.isLiveWater = isLiveWater;
 	}
 	
@@ -38,13 +37,6 @@ public abstract class Animal {
 		this.name = name;
 	}
 
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
-	}
 	
 	
 }

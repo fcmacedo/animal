@@ -9,24 +9,62 @@ public class Evaluation {
 
 	public static boolean eval(ArrayList<Animal> list){
 		
-		int i=1;
+		int i=0;
 		
-		if(list.size() == 1 )
-		
-			if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é um Tubarão?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
-	
-				JOptionPane.showMessageDialog(null, "Acertei de novo", "JogoDosAnimais", JOptionPane.OK_OPTION);
-				return true;
-				
-			}	
+		boolean isWater = list.get(i).isLiveWater;
 		
 		while(i < list.size()){
+		
+			if(list.get(i).action == null){
 			
-			if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + list.get(i).getAction(), "Desisto", JOptionPane.YES_NO_OPTION) == 0){
+				if(isWater){
+				
+					if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é um Tubarão?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
+			
+						JOptionPane.showMessageDialog(null, "Acertei de novo", "JogoDosAnimais", JOptionPane.OK_OPTION);
+						return true;
+						
+					}else{
+						i++;
+						continue;
+					}
+					
+				}else{
+					if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é um Macaco?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
+						
+						JOptionPane.showMessageDialog(null, "Acertei de novo", "JogoDosAnimais", JOptionPane.OK_OPTION);
+						return true;
+						
+					}else{
+						i++;
+						continue;
+					}
+					
+				}
+			}
+			
+			//não é o default (macaco e tubarao) e não é a primeira vez
+				
+		
+			
+			if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + list.get(i).getName()+ "?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
+
+				
+				JOptionPane.showMessageDialog(null, "Acertei de novo", "JogoDosAnimais", JOptionPane.OK_OPTION);
+				return true;
 
 				
 				
-			}	
+			}else{
+				
+				
+				if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + list.get(i).action + "?", "Desisto", JOptionPane.YES_NO_OPTION) == 0){
+
+					
+					
+				}
+				
+			}
 			
 			i++;
 			

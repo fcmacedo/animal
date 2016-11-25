@@ -6,9 +6,7 @@ public class Animal {
 	
 	protected String name;
 	protected String action;
-	protected Animal animalLeft;
-	protected Animal animalRight;
-	
+		
 		
 	Animal(){
 	}
@@ -27,22 +25,7 @@ public class Animal {
 		this.action = action;
 	}
 
-	public Animal getAnimalLeft() {
-		return animalLeft;
-	}
-
-	public void setAnimalLeft(Animal animalWater) {
-		this.animalLeft = animalWater;
-	}
-
-	public Animal getAnimalRight() {
-		return animalRight;
-	}
-
-	public void setAnimalRight(Animal animalTerrain) {
-		this.animalRight = animalTerrain;
-	}
-
+	
 	public String getName() {
 		return name;
 	}

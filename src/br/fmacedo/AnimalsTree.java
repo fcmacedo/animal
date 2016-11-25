@@ -1,107 +1,105 @@
 package br.fmacedo;
 
-import javax.swing.JOptionPane;
-
 public class AnimalsTree {
 
-	 private Animal root;
+	public static final boolean LEFT = true;
+	public static final boolean RIGHT = false;
+	private Node root;
 
-	    public boolean isEmpty(){
-	        if(root == null){
-	            return true;
-	        }
-	        return false;
-	    }
-	    
-	    public void printTree(){
-	        if(this.root == null)
-	            System.out.println("Árvore vazia");
-	        else
-	        	printTree(this.root);
-	    }
-	    
-	    private void printTree(Animal Animal){
-	        if(Animal.getAnimalLeft() != null){
-	        	printTree(Animal.getAnimalLeft());
-	        }
-	        if (Animal.getAnimalRight() != null){
-	        	printTree(Animal.getAnimalRight());
-	        }
-	        System.out.println("Nó: " + Animal.getName());
-	    }
-	    
-	    
-	    
-	    public void insert(String name, String action){
-	    	insert(this.root, name,action);
-	    }
-	    
-	    public void insert(Animal Animal, String name, String action) {
-	        if(this.root == null){
-	           
-	            this.root = new Animal(name,action);
+	public Node getRoot() {
+		return root;
+	}
 
-	       
-	        } else {
-	            
-	        	if (action.equalsIgnoreCase(Animal.getAction())) {
-	                
-	        		if (Animal.getAnimalLeft() != null) { 
-	                	insert(Animal.getAnimalLeft(), name,action); 
-	                } else { 
-	                    //Se nodo esquerdo vazio insere o novo no aqui 
-	                    Animal.setAnimalLeft(new Animal(name,action)); 
-	                } 
-	        		
-	                //Verifica se o valor a ser inserido é maior que o no corrente da árvore, se sim vai para subarvore direita 
-	            }else{ 
-	                //Se tiver elemento no no direito continua a busca 
-	                if (Animal.getAnimalRight() != null) { 
-	                	insert(Animal.getAnimalRight(), name,action); 
-	                } else {
-	                    //Se nodo direito vazio insere o novo no aqui 
-	                    Animal.setAnimalRight(new Animal(name,action)); 
-	                } 
-	            }
-	        }
-	    }
-	    
+	
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+
+
+
+	public boolean isEmpty(){
+		if(root == null){
+			return true;
+		}
+		return false;
+	}
+
+
+	public void insert(String name, String action, boolean left){
+		insert(this.root, name,action,left);
+	}
+
+	public void insert(Node node, String name, String action, boolean left) {
+
+		if(this.root == null){
+
+			this.root = new Node(name,action);
+
+
+		} else {
+
+			if (left) {
+
+				if (node.getLeft() != null) { 
+					insert(node.getLeft(), name,action,left); 
+
+				} else { 
+
+					node.setLeft(new Node(name,action)); 
+				} 
+
+
+			}else{ 
+
+				if (node.getRight() != null) { 
+					insert(node.getRight(), name,action,left); 
+				} else {
+
+					node.setRight(new Node(name,action)); 
+				} 
+			}
+		}
+
+	}
+
+
+	/*
 	    public void prefixado() {
 	    	prefixado(this.root);
 	    }
-	    
+
 	    public boolean prefixado(Animal no) {
 	        if(no != null){
-	            if(no.getAnimalRight()==null && no.getAnimalLeft()==null){
-	            	
+	            if(no.getRight()==null && no.getLeft()==null){
+
 	            	if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é " + no.getName()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
-	            		
+
 	            		return true;
-	            	
+
 	            	}else{
 	            		String name = JOptionPane.showInputDialog(null, "Qual animal você pensou?");
 	            		String action = JOptionPane.showInputDialog(null, "Um(a) " + name + " _____ mas um " + no.getName()+ "!");
 	            		insert(no,name,action);
 	            		return false;
 	            	}
-	            	
+
 	            }else {
 	            	if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + no.getAction()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
-	            			prefixado(no.getAnimalLeft());	
+	            			prefixado(no.getLeft());	
 	            	}else{		
-	            			prefixado(no.getAnimalRight());
+	            			prefixado(no.getRight());
 	            	}		
-	            	
+
 	            }
-	        	
+
 	        	System.out.print(no.getName() + " ");
-	            
-	            
+
+
 	        }
 	        return false;
 	    }
-	    
-	  
 
-	
+	 */
+
+
 }

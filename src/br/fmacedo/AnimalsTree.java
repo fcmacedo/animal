@@ -1,5 +1,7 @@
 package br.fmacedo;
 
+import javax.swing.JOptionPane;
+
 public class AnimalsTree {
 
 	 private Animal root;
@@ -68,12 +70,35 @@ public class AnimalsTree {
 	    	prefixado(this.root);
 	    }
 	    
-	    public void prefixado(Animal no) {
+	    public boolean prefixado(Animal no) {
 	        if(no != null){
-	            System.out.print(no.getName() + " ");
-	            prefixado(no.getAnimalLeft());
-	            prefixado(no.getAnimalRight());
+	            if(no.getAnimalRight()==null && no.getAnimalLeft()==null){
+	            	
+	            	if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é " + no.getName()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
+	            		
+	            		return true;
+	            	
+	            	}else{
+	            		String name = JOptionPane.showInputDialog(null, "Qual animal você pensou?");
+	            		String action = JOptionPane.showInputDialog(null, "Um(a) " + name + " _____ mas um " + no.getName()+ "!");
+	            		insert(no,name,action);
+	            		return false;
+	            	}
+	            	
+	            }else {
+	            	if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + no.getAction()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
+	            			prefixado(no.getAnimalLeft());	
+	            	}else{		
+	            			prefixado(no.getAnimalRight());
+	            	}		
+	            	
+	            }
+	        	
+	        	System.out.print(no.getName() + " ");
+	            
+	            
 	        }
+	        return false;
 	    }
 	    
 	  

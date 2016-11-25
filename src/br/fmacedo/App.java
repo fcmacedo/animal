@@ -14,22 +14,27 @@ public class App {
 		
 		Animal animal;
 		
-		if(JOptionPane.showConfirmDialog(null, "O animal que você pensou vive na água?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
-			
-			if(tree.isEmpty())
-			    tree.insert("Tubarao","vive na agua");
-				
-			    tree.prefixado();
-			
-			
-		}else{
-			
-			if(tree.isEmpty())
-			    tree.insert("Macaco","vive na terra");
-		    	tree.prefixado();
-			
-		}
+		tree.insert("Tubarao","vive na agua");
+		tree.insert("Macaco","vive na terra");
 		
+		while(true){
+		
+			//if(JOptionPane.showConfirmDialog(null, "O animal que você pensou vive na água?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
+				
+			//	if(tree.isEmpty())
+			//	    tree.insert("Tubarao","vive na agua");
+					
+				    tree.prefixado();
+				
+				
+			//}else{
+				
+			//	if(tree.isEmpty())
+			//	    tree.insert("Macaco","vive na terra");
+			//    	tree.prefixado();
+				
+			//}
+		}	
 		
 		/*
 		//percorrer a árvore

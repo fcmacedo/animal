@@ -25,6 +25,15 @@ public class AnimalsTree {
 	}
 
 
+	public void insert(String name, String action){
+		if(this.root == null){
+
+			this.root = new Node(name,action);
+			
+		}	
+	}
+	
+	
 	public void insert(String name, String action, boolean left){
 		insert(this.root, name,action,left);
 	}
@@ -53,6 +62,7 @@ public class AnimalsTree {
 
 				if (node.getRight() != null) { 
 					insert(node.getRight(), name,action,left); 
+				
 				} else {
 
 					node.setRight(new Node(name,action)); 

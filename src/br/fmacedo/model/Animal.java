@@ -1,4 +1,4 @@
-package br.fmacedo;
+package br.fmacedo.model;
 
 public class Animal {
 

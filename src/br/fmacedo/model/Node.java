@@ -1,4 +1,4 @@
-package br.fmacedo;
+package br.fmacedo.model;
 
 public class Node {
 
@@ -6,7 +6,7 @@ public class Node {
 	private Node left;
 	private Animal animal;
 	
-	Node(String nome, String action){
+	public Node(String nome, String action){
 		this.animal = new Animal(nome,action);
 	}
 	

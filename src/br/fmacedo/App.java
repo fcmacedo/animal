@@ -3,110 +3,159 @@ package br.fmacedo;
 
 import javax.swing.JOptionPane;
 
+import br.fmacedo.model.Node;
+import br.fmacedo.util.AnimalsTree;
+
 public class App {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("Pense em um animal:");
-
 		AnimalsTree tree = new AnimalsTree();
 
-		Animal animal;
-
-		//tree.insert("Raiz", null);
-		tree.insert("Tubarao","vive na agua",AnimalsTree.LEFT);
-		tree.insert("Macaco","vive na terra",AnimalsTree.RIGHT);
-
-		Node root = tree.getRoot();
-
-		System.out.println(root.getAnimal().getName());
-
-		boolean nodeLeaf,side=true;
-
-		while(true){
-
-			tree.setRoot(root);
-
-			//System.out.println("saiu laço interior");
-
-			while(tree.getRoot()!=null){
 
 
-				if(JOptionPane.showConfirmDialog(null, "O animal que você pensou "+ tree.getRoot().getAnimal().getAction() +"?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
+		tree.inicialize();
+		
+		Node root = tree.getCurrent();
 
+		
 
-					side = AnimalsTree.LEFT;
+		while(JOptionPane.showConfirmDialog(null, "Pense em um animal", "Jogo", JOptionPane.YES_NO_OPTION) == 0){
 
+			tree.setCurrent(root);
+			tree.setPreviews(null);
+		
+			int answer = 2;
 
-				}else{
+			
+			while(true){
+				if(tree.getPreviews()!=null)
+				    System.out.println("PREVIEWS: " + tree.getPreviews().getAnimal().getName());
 
-					side = AnimalsTree.RIGHT;
+				if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + tree.getCurrent().getAnimal().getAction()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION)==0){
 
-				}
+					if(lastNode(root,tree,AnimalsTree.LEFT) || justLeftEmpty(root,tree)){
 
-
-				nodeLeaf = isLeaf(root,tree,side);
-
-
-				if(nodeLeaf){
-
-					if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é " + tree.getRoot().getAnimal().getName()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
-
-						JOptionPane.showMessageDialog(null, "Acertei de novo!");
+						isAnimal(tree,AnimalsTree.LEFT);
 						break;
 
-
-
 					}else{
-						String name = JOptionPane.showInputDialog(null, "Qual animal você pensou?");
-						String action = JOptionPane.showInputDialog(null, "Um(a) " + name + " _______ mas um " + tree.getRoot().getAnimal().getName()+ " não!");
-						tree.insert(tree.getRoot(),name,action,side);
-						break;
-					}	
-
-
-				}else{
-
-					if(side){
-						if(tree.getRoot().getLeft()!=null)
-							tree.setRoot(tree.getRoot().getLeft());
-					}else{
-						if(tree.getRoot().getRight()!=null)
-							tree.setRoot(tree.getRoot().getRight());
+						
+						if(tree.getCurrent().getLeft()!=null){
+							
+						    tree.setPreviews(tree.getCurrent());
+							
+							tree.setCurrent(tree.getCurrent().getLeft());
+						}	
+						
+						
 					}
+						
+					answer=0;
 
+				}else{
+					
+					
+					if(lastNode(root,tree,AnimalsTree.RIGHT) || justRightEmpty(root,tree)){
+
+						isAnimal(tree,AnimalsTree.RIGHT);
+						break;
+						
+					}else{
+						
+						if(tree.getCurrent().getRight()!=null){
+							if(answer!=1)
+							     tree.setPreviews(tree.getCurrent());
+						    tree.setCurrent(tree.getCurrent().getRight());
+						
+						}
+
+					}
+					
+					answer = 1;
+					
 				}
-
 
 
 			}
 
 
-		}
 
+		}
 
 
 
 	}
-
-	private static boolean isLeaf(Node root, AnimalsTree tree, boolean side){
-
-		boolean folha;
-
-		folha = tree.getRoot().getLeft()==null && tree.getRoot().getRight()==null;
-
-		if(root == tree.getRoot() && side){
-			folha = tree.getRoot().getLeft()==null;
-		}
-
-		if(root == tree.getRoot() && !side){
-			tree.setRoot(tree.getRoot().getRight());		
-			folha = tree.getRoot().getRight()==null && tree.getRoot().getLeft()==null;
-		}
-
-		return folha;
+	
+	//node esquedo null
+	private static boolean justLeftEmpty(Node root, AnimalsTree tree){
+		
+		return tree.getCurrent().getLeft()==null;
 	}
+	
+	//node direito null
+	private static boolean justRightEmpty(Node root, AnimalsTree tree){
+		
+		return tree.getCurrent().getRight()==null;
+	}
+
+	
+	//define folha, respeitando a particularidade dos nodes iniciais Tubarão e Macaco
+	private static boolean lastNode(Node root, AnimalsTree tree,boolean leftRight){
+
+		boolean leaf;
+
+		leaf = tree.getCurrent().getLeft()==null && tree.getCurrent().getRight()==null;
+
+		
+		if(root == tree.getCurrent() && leftRight){
+			leaf = tree.getCurrent().getLeft()==null;
+		}
+
+		if(root == tree.getCurrent() && !leftRight){
+			tree.setCurrent(root.getRight());	
+			tree.setPreviews(root.getRight());
+			leaf = tree.getCurrent().getRight()==null && tree.getCurrent().getLeft()==null;
+		}
+		
+		return leaf;
+
+	}
+
+
+	private static void isAnimal(AnimalsTree tree, boolean leftRight){
+
+		String animal;
+		if(leftRight){
+			animal = tree.getCurrent().getAnimal().getName();
+			
+		}else{
+			animal = tree.getPreviews().getAnimal().getName();
+		}
+		
+		if(JOptionPane.showConfirmDialog(null, "O animal que você pensou é " + animal + "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION) == 0){
+
+			JOptionPane.showMessageDialog(null, "Acertei de novo!");
+			
+
+
+		}else{
+			
+			String name = JOptionPane.showInputDialog(null, "Qual animal você pensou?");
+			String action = JOptionPane.showInputDialog(null, "Um(a) " + name + " _______ mas um " + tree.getCurrent().getAnimal().getName()+ " não!");
+			
+			Node node = new Node(name,action);
+			
+			tree.insertNode(node,leftRight);
+
+			
+		}	
+
+
+	}
+
+
 
 }
 

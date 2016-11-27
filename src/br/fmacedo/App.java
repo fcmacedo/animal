@@ -21,21 +21,19 @@ public class App {
 
 		
 
-		while(JOptionPane.showConfirmDialog(null, "Pense em um animal", "Jogo", JOptionPane.YES_NO_OPTION) == 0){
+		while(JOptionPane.showConfirmDialog(null, "Pense em um animal", "Jogo dos Animais", JOptionPane.YES_NO_OPTION) == 0){
 
 			tree.setCurrent(root);
 			tree.setPreviews(null);
 		
-			int answer = 2;
 
 			
 			while(true){
-				if(tree.getPreviews()!=null)
-				    System.out.println("PREVIEWS: " + tree.getPreviews().getAnimal().getName());
+				
 
 				if(JOptionPane.showConfirmDialog(null, "O animal que você pensou " + tree.getCurrent().getAnimal().getAction()+ "?", "Nunca Desisto", JOptionPane.YES_NO_OPTION)==0){
 
-					if(lastNode(root,tree,AnimalsTree.LEFT) || justLeftEmpty(root,tree)){
+					if(tree.lastNode(root,AnimalsTree.LEFT) || tree.justLeftEmpty()){
 
 						isAnimal(tree,AnimalsTree.LEFT);
 						break;
@@ -45,19 +43,18 @@ public class App {
 						if(tree.getCurrent().getLeft()!=null){
 							
 						    tree.setPreviews(tree.getCurrent());
-							
 							tree.setCurrent(tree.getCurrent().getLeft());
 						}	
 						
 						
 					}
 						
-					answer=0;
+					
 
 				}else{
 					
 					
-					if(lastNode(root,tree,AnimalsTree.RIGHT) || justRightEmpty(root,tree)){
+					if(tree.lastNode(root,AnimalsTree.RIGHT) || tree.justRightEmpty()){
 
 						isAnimal(tree,AnimalsTree.RIGHT);
 						break;
@@ -65,15 +62,14 @@ public class App {
 					}else{
 						
 						if(tree.getCurrent().getRight()!=null){
-							if(answer!=1)
-							     tree.setPreviews(tree.getCurrent());
+							
 						    tree.setCurrent(tree.getCurrent().getRight());
 						
 						}
 
 					}
 					
-					answer = 1;
+					
 					
 				}
 
@@ -88,42 +84,9 @@ public class App {
 
 	}
 	
-	//node esquedo null
-	private static boolean justLeftEmpty(Node root, AnimalsTree tree){
-		
-		return tree.getCurrent().getLeft()==null;
-	}
-	
-	//node direito null
-	private static boolean justRightEmpty(Node root, AnimalsTree tree){
-		
-		return tree.getCurrent().getRight()==null;
-	}
-
-	
-	//define folha, respeitando a particularidade dos nodes iniciais Tubarão e Macaco
-	private static boolean lastNode(Node root, AnimalsTree tree,boolean leftRight){
-
-		boolean leaf;
-
-		leaf = tree.getCurrent().getLeft()==null && tree.getCurrent().getRight()==null;
-
-		
-		if(root == tree.getCurrent() && leftRight){
-			leaf = tree.getCurrent().getLeft()==null;
-		}
-
-		if(root == tree.getCurrent() && !leftRight){
-			tree.setCurrent(root.getRight());	
-			tree.setPreviews(root.getRight());
-			leaf = tree.getCurrent().getRight()==null && tree.getCurrent().getLeft()==null;
-		}
-		
-		return leaf;
-
-	}
 
 
+	//verifica se é o animal
 	private static void isAnimal(AnimalsTree tree, boolean leftRight){
 
 		String animal;

@@ -64,6 +64,42 @@ public class AnimalsTree {
 		
 	}
 
+	
+	//node esquerdo null
+	public boolean justLeftEmpty(){
+		
+		return current.getLeft()==null;
+	}
+	
+	//node direito null
+	public boolean justRightEmpty(){
+		
+		return current.getRight()==null;
+	}
+
+	
+	//define folha, respeitando a particularidade dos nodes iniciais Tubarão e Macaco
+	public boolean lastNode(Node root,boolean leftRight){
+
+		boolean leaf;
+
+		leaf = current.getLeft()==null && current.getRight()==null;
+
+		
+		if(root == current && leftRight){
+			leaf = current.getLeft()==null;
+		}
+
+		if(root == current && !leftRight){
+			current = root.getRight();	
+			previews = root.getRight();
+			leaf = current.getRight()==null && current.getLeft()==null;
+		}
+		
+		return leaf;
+
+	}
+	
 
 	public void printTree(){
 		if(this.current == null)
